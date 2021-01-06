@@ -1,0 +1,110 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Top-Router
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.645
+ encapsulation dot1Q 645
+ ip address 10.168.184.5 255.255.255.128
+!
+interface FastEthernet0/1
+ ip address 17.10.7.189 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet1/0
+ no ip address
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 101
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.128.0 0.0.1.255 area 1
+!
+router ospf 202
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.132.0 0.0.1.255 area 2
+!
+router ospf 303
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.136.0 0.0.1.255 area 3
+!
+router ospf 404
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+!
+router ospf 1
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.136.0 0.0.1.255 area 1
+ network 10.166.132.0 0.0.1.255 area 2
+ network 10.166.128.0 0.0.1.255 area 3
+ network 10.166.140.0 0.0.1.255 area 4
+!
+router rip
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

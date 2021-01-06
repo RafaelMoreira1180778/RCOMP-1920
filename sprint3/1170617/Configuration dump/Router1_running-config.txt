@@ -1,0 +1,122 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet0/0.270
+ encapsulation dot1Q 270
+ ip address 10.166.129.129 255.255.255.192
+!
+interface FastEthernet0/0.271
+ encapsulation dot1Q 271
+ ip address 10.166.129.65 255.255.255.192
+!
+interface FastEthernet0/0.272
+ encapsulation dot1Q 272
+ ip address 10.166.129.1 255.255.255.192
+!
+interface FastEthernet0/0.273
+ encapsulation dot1Q 273
+ ip address 10.166.128.1 255.255.255.0
+!
+interface FastEthernet0/0.274
+ encapsulation dot1Q 274
+ ip address 10.166.129.193 255.255.255.192
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet1/0
+ no ip address
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 101
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.128.0 0.0.1.255 area 1
+!
+router ospf 202
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.132.0 0.0.1.255 area 2
+!
+router ospf 303
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.136.0 0.0.1.255 area 3
+!
+router ospf 404
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.140.0 0.0.1.255 area 4
+!
+ip classless
+ip route 10.166.136.0 255.255.252.0 10.166.134.3 
+ip route 10.166.132.0 255.255.252.0 10.166.134.2 
+ip route 10.166.140.0 255.255.252.0 10.166.134.4 
+ip route 0.0.0.0 0.0.0.0 17.10.10.154 
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

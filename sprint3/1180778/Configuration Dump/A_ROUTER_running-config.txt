@@ -1,0 +1,197 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+ip dhcp excluded-address 10.166.137.129
+ip dhcp excluded-address 10.166.137.1
+ip dhcp excluded-address 10.166.136.161
+ip dhcp excluded-address 10.166.137.65
+ip dhcp excluded-address 10.166.136.129
+!
+ip dhcp pool A_Wifi_VLAN
+ network 10.166.137.128 255.255.255.224
+ default-router 10.166.137.129
+ dns-server 10.166.136.130
+ domain-name rcomp-19-20-de-g3
+ip dhcp pool A_Floor0_VLAN
+ network 10.166.137.0 255.255.255.192
+ default-router 10.166.137.1
+ dns-server 10.166.136.130
+ domain-name rcomp-19-20-de-g3
+ip dhcp pool A_Floor1_VLAN
+ network 10.166.137.64 255.255.255.192
+ default-router 10.166.137.65
+ dns-server 10.166.136.130
+ domain-name rcomp-19-20-de-g3
+ip dhcp pool A_VoIP_VLAN
+ network 10.166.137.160 255.255.255.224
+ default-router 10.166.137.161
+ option 150 ip 10.166.137.161
+ dns-server 10.166.136.130
+ domain-name rcomp-19-20-de-g3
+ip dhcp pool A_DMZ
+ network 10.166.137.128 255.255.255.224
+ default-router 10.166.136.129
+ dns-server 10.166.136.130
+ domain-name rcomp-19-20-de-g3
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface FastEthernet1/0
+ no ip address
+!
+interface FastEthernet1/0.290
+ encapsulation dot1Q 290
+ ip address 10.166.136.1 255.255.255.128
+!
+interface FastEthernet1/0.291
+ encapsulation dot1Q 291
+ ip address 10.166.136.129 255.255.255.128
+!
+interface FastEthernet1/0.292
+ encapsulation dot1Q 292
+ ip address 10.166.137.1 255.255.255.192
+!
+interface FastEthernet1/0.293
+ encapsulation dot1Q 293
+ ip address 10.166.137.65 255.255.255.192
+!
+interface FastEthernet1/0.294
+ encapsulation dot1Q 294
+ ip address 10.166.137.129 255.255.255.224
+!
+interface FastEthernet1/0.295
+ encapsulation dot1Q 295
+ ip address 10.166.137.161 255.255.255.224
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 101
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.128.0 0.0.1.255 area 1
+!
+router ospf 202
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.132.0 0.0.1.255 area 2
+!
+router ospf 303
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.136.0 0.0.1.255 area 3
+!
+router ospf 404
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.140.0 0.0.1.255 area 4
+!
+router ospf 1
+ log-adjacency-changes
+ network 10.166.142.0 0.0.1.255 area 0
+ network 10.166.128.0 0.0.1.255 area 1
+ network 10.166.136.0 0.0.1.255 area 1
+!
+ip nat inside source static tcp 10.166.136.130 80 10.166.136.0 8081 
+ip nat inside source static tcp 10.166.136.130 443 10.166.136.0 8082 
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+dial-peer voice 2000 voip
+ destination-pattern 2...
+ session target ipv4:10.166.133.65
+!
+dial-peer voice 3000 voip
+ destination-pattern 3...
+ session target ipv4:10.166.129.193
+!
+dial-peer voice 4000 voip
+ destination-pattern 4...
+ session target ipv4:10.166.141.193
+!
+telephony-service
+ max-ephones 20
+ max-dn 20
+ ip source-address 10.166.137.161 port 2000
+ auto assign 1 to 2
+!
+ephone-dn 1
+ number 1001
+!
+ephone-dn 2
+ number 1002
+!
+ephone 1
+ device-security-mode none
+ mac-address 0060.4793.6621
+ type 7960
+ button 1:1
+!
+ephone 2
+ device-security-mode none
+ mac-address 00E0.F940.A32C
+ type 7960
+ button 1:2
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

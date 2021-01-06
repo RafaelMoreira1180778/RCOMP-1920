@@ -1,0 +1,151 @@
+ip route 10.166.136.0 255.255.252.0 10.166.134.3
+ip route 10.166.132.0 255.255.252.0 10.166.134.2
+ip route 10.166.128.0 255.255.252.0 10.166.134.1
+ip route 10.166.140.0 255.255.252.0 10.166.134.4
+
+BACKBONE:
+interface FastEthernet 0/0.290
+encapsulation dot1Q 290
+ip address 10.166.136.1 255.255.255.128
+no shutdown
+exit
+
+A_DMZ:
+interface FastEthernet 0/0.291
+encapsulation dot1Q 291
+ip address 10.166.136.129 255.255.255.128
+no shutdown
+exit
+
+A_Floor0:
+interface FastEthernet 0/0.292
+encapsulation dot1Q 292
+ip address 10.166.137.1 255.255.255.192
+no shutdown
+exit
+
+A_Floor1_VLAN:
+interface FastEthernet 0/0.293
+encapsulation dot1Q 293
+ip address 10.166.137.65 255.255.255.192
+no shutdown
+exit
+
+A_Wifi_VLAN:
+interface FastEthernet 0/0.294
+encapsulation dot1Q 294
+ip address 10.166.137.129 255.255.255.224
+no shutdown
+exit
+
+A_VoIP_VLAN:
+interface FastEthernet 0/0.295
+encapsulation dot1Q 295
+ip address 10.166.137.161 255.255.255.224
+no shutdown
+exit
+
+B_Wifi_VLAN:
+interface FastEthernet 0/0.282
+encapsulation dot1Q 282
+ip address 10.166.132.1 255.255.255.128
+no shutdown
+exit
+
+B_Floor1_VLAN:
+interface FastEthernet 0/0.281
+encapsulation dot1Q 281
+ip address 10.166.132.129 255.255.255.128
+no shutdown
+exit
+
+B_Floor0_VLAN:
+interface FastEthernet 0/0.280
+encapsulation dot1Q 280
+ip address 10.166.133.1 255.255.255.192
+no shutdown
+exit
+
+B_VoIP_VLAN:
+interface FastEthernet 0/0.284
+encapsulation dot1Q 284
+ip address 10.166.133.65 255.255.255.192
+no shutdown
+exit
+
+B_DMZ_VLAN:
+interface FastEthernet 0/0.283
+encapsulation dot1Q 283
+ip address 10.166.133.128 255.255.255.240
+no shutdown
+exit
+
+C_DMZ_VLAN:
+interface FastEthernet 0/0.273
+encapsulation dot1Q 273
+ip address 10.166.128.1 255.255.255.0
+no shutdown
+exit
+
+C_Wifi_VLAN:
+interface FastEthernet 0/0.272
+encapsulation dot1Q 272
+ip address 10.166.129.1 255.255.255.192
+no shutdown
+exit
+
+C_Floor1_VLAN:
+interface FastEthernet 0/0.271
+encapsulation dot1Q 271
+ip address 10.166.129.65 255.255.255.192
+no shutdown
+exit
+
+C_Floor0_VLAN:
+interface FastEthernet 0/0.270
+encapsulation dot1Q 270
+ip address 10.166.129.129 255.255.255.192
+no shutdown
+exit
+
+C_VoIP_VLAN:
+interface FastEthernet 0/0.274
+encapsulation dot1Q 274
+ip address 10.166.129.193 255.255.255.192
+no shutdown
+exit
+
+D_DMZ:
+interface FastEthernet 0/0.303
+encapsulation dot1Q 303
+ip address 10.166.140.1 255.255.255.0
+no shutdown
+exit
+
+D_WIFI:
+interface FastEthernet 0/0.302
+encapsulation dot1Q 302
+ip address 10.166.141.1 255.255.255.192
+no shutdown
+exit
+
+D_Floor1:
+interface FastEthernet 0/0.301
+encapsulation dot1Q 301
+ip address 10.166.141.65 255.255.255.192
+no shutdown
+exit
+
+D_Floor0:
+interface FastEthernet 0/0.300
+encapsulation dot1Q 300
+ip address 10.166.141.129 255.255.255.192
+no shutdown
+exit
+
+D_VoIp:
+interface FastEthernet 0/0.304
+encapsulation dot1Q 304
+ip address 10.166.141.193 255.255.255.224
+no shutdown
+exit
